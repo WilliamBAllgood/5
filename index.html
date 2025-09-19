@@ -38,6 +38,14 @@
         .nav-link:hover .plus-text, .active-nav-link .plus-text {
             color: #6478E0;
         }
+        /* New CSS for the dynamic pop-out effect */
+        .pop-out-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .pop-out-effect:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 20px 8px rgba(255, 146, 143, 0.4);
+        }
     </style>
     <script>
         tailwind.config = {
@@ -107,7 +115,7 @@
         <main id="home" class="page container mx-auto px-6 py-12">
             <div class="max-w-4xl mx-auto">
                 <!-- Welcome Section -->
-                <section class="text-center mb-16 p-8 rounded-xl shadow-sm border border-gray-200" style="background-color: #131768;">
+                <section class="text-center mb-16 p-8 rounded-xl border border-gray-200 pop-out-effect" style="background-color: #131768;">
                     <h1 class="font-literata text-4xl md:text-5xl font-bold text-white mb-3">
                         Welcome to the
                     </h1>
