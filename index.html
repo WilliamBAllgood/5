@@ -32,6 +32,12 @@
             transform: rotate(180deg);
             color: #FF928F; /* Change color to pink when open */
         }
+        .plus-text {
+            color: #FF928F;
+        }
+        .nav-link:hover .plus-text, .active-nav-link .plus-text {
+            color: #6478E0;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -71,7 +77,7 @@
                     <a href="#" data-page="hotel-effectiveness" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold whitespace-now-wrap">Hotel Effectiveness</a>
                     <a href="#" data-page="profitsword" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold">ProfitSword</a>
                     <a href="#" data-page="transcendent" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold">Transcendent</a>
-                    <a href="#" data-page="actabl-academy-plus" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold whitespace-nowrap">Actabl Academy Plus</a>
+                    <a href="#" data-page="actabl-academy-plus" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold whitespace-nowrap">Actabl Academy <span class="plus-text">Plus</span></a>
                     <!-- Dropdown Menu -->
                     <div class="relative group">
                         <button class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold whitespace-nowrap flex items-center focus:outline-none">
