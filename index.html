@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actabl Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Style for the active navigation link */
+        .active-nav-link {
+            font-weight: 600;
+            color: #FF928F; /* actabl-accent-pink */
+            border-bottom: 2px solid #FF928F;
+        }
+        /* Ensure iframe takes up remaining height */
+        #course-view iframe {
+            height: calc(100vh - 116px); /* Adjust based on header (68px) + banner (~48px) height */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'literata': ['Literata', 'serif'],
+                    },
+                    colors: {
+                        'actabl-deep-blue': '#0D0C41',
+                        'actabl-dark-blue': '#131768',
+                        'actabl-light-blue': '#6478E0',
+                        'actabl-accent-pink': '#FF928F',
+                        'actabl-accent-peach': '#FFC59A',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-actabl-dark-blue text-gray-800 font-inter">
+
+    <!-- Header and Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="px-8 py-4">
+            <!-- This container now correctly separates the logo from the nav links -->
+            <div class="container mx-auto flex items-center justify-between">
+                <!-- Logo on the left -->
+                <a href="#" data-page="home" class="cursor-pointer">
+                    <img src="https://i.ibb.co/wNXQLBXL/Actabl-Academy-Brand-Mark-light-bg.png" alt="Actabl Academy Brand Mark" class="h-12 w-auto">
+                </a>
+                
+                <!-- Navigation Links on the right -->
+                <div id="main-nav" class="flex items-center space-x-2 sm:space-x-4 md:space-x-6">
+                    <a href="#" data-page="home" class="nav-link active-nav-link transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold">Home</a>
+                    <a href="#" data-page="alice" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold">Alice</a>
+                    <a href="#" data-page="hotel-effectiveness" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold whitespace-nowrap">Hotel Effectiveness</a>
+                    <a href="#" data-page="profitsword" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold">ProfitSword</a>
+                    <a href="#" data-page="transcendent" class="nav-link text-actabl-light-blue hover:text-actabl-accent-pink transition duration-300 px-3 py-2 text-sm sm:text-base font-literata font-bold">Transcendent</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content Wrapper -->
+    <div id="page-content">
+
+        <!-- HOMEPAGE CONTENT -->
+        <main id="home" class="page container mx-auto px-6 py-12">
+            <div class="max-w-4xl mx-auto">
+                <!-- Welcome Section -->
+                <section class="text-center mb-16">
+                    <h1 class="font-literata text-4xl md:text-5xl font-bold text-white mb-3">
+                        Welcome to the
+                    </h1>
+                    <div>
+                        <img src="https://i.ibb.co/YT4hvxZV/Actabl-Academy-Hor-all-white.png" alt="Actabl Academy Logo" class="h-auto w-full max-w-lg mx-auto">
+                    </div>
+                </section>
+
+                <!-- Content Blocks Wrapper -->
+                <div class="space-y-10">
+                    <!-- About Section -->
+                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">About</h2>
+                        <p class="text-gray-600 leading-relaxed">
+                            Launched in 2025, the Actabl Academy serves as the central learning hub for the entire Actabl universe. Here, you'll discover a consolidated catalog of self-paced training courses, meticulously designed for each of Actabl's four core products. Navigate to each Series Homepage to explore its full curriculum. From there, each Curriculum Level Dashboard presents a detailed list of courses, complete with clear descriptions and defined learning objectives, ensuring you gain the expertise you need.
+                        </p>
+                    </section>
+                    
+                    <!-- Quick Tour Section -->
+                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Get Started with a Quick Tour!</h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            To help you make the most of your learning journey, watch this short introductory video. We'll walk you through the Actabl Academy, demonstrate how to navigate our consolidated catalog, and show you where to access all the valuable training resources.
+                        </p>
+                        <div class="rounded-lg overflow-hidden shadow-md">
+                            <script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/0594k2ob98.js" async type="module"></script><style>wistia-player[media-id='0594k2ob98']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/0594k2ob98/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style><wistia-player media-id="0594k2ob98" seo="false" aspect="1.7777777777777777"></wistia-player>
+                        </div>
+                    </section>
+
+                    <!-- Support and Feedback Section -->
+                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Actabl Academy Support and Feedback</h2>
+                        <p class="text-gray-600 leading-relaxed">
+                            We value your experience and are committed to continuously improving the Actabl Academy. Have a question, encountered an issue, or simply want to share your thoughts on our courses and platform? Please use the form below to connect with the Actabl Learning & Development Team. Your feedback helps us grow!
+                        </p>
+                        <div class="mt-6 border-t border-gray-200 pt-6 text-center">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7eXqB4bTFeXW4kCeIr_xIJ0fMOwVjqfTi4Mq1JlNKgd2Mxw/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="inline-block bg-actabl-light-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-actabl-dark-blue transition-colors duration-300 shadow-md">
+                                Open Support Form
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- ALICE PAGE CONTENT -->
+        <main id="alice" class="page container mx-auto px-6 py-12" style="display: none;">
+             <div class="max-w-4xl mx-auto">
+                <section class="text-center mb-16">
+                    <h1 class="font-literata text-4xl md:text-5xl font-bold text-white mb-6">Welcome to the <span class="text-actabl-accent-pink">Alice</span> Product Training Dashboard</h1>
+                </section>
+                <div class="space-y-10">
+                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Alice 100: Awareness</h2>
+                        <div class="mt-6 border-t border-gray-200 pt-6">
+                            <!-- Grid for Course Tiles -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <!-- Course Tile -->
+                                <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-101-getting-started-raw-Xch61X3s/content/index.html#/">
+                                    <!-- Course Info -->
+                                    <div class="p-4 flex flex-col flex-grow">
+                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 101: Getting Started</h3>
+                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Take this 25-minute course to learn the fundamentals of Alice by Actabl.</p>
+                                    </div>
+                                </div>
+                                <!-- Add more course tiles here in the future -->
+                            </div>
+                        </div>
+                    </section>
+                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Alice 200: Learning</h2>
+                        <div class="mt-6 border-t border-gray-200 pt-6">
+                            <!-- Grid for Course Tiles -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <!-- Course Tile -->
+                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
+                                    <div class="p-4 flex flex-col flex-grow">
+                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 201: Desktop User</h3>
+                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                                <!-- Course Tile -->
+                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
+                                    <div class="p-4 flex flex-col flex-grow">
+                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 202: Admin User</h3>
+                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
+                                </div>
+                                <!-- Course Tile -->
+                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
+                                    <div class="p-4 flex flex-col flex-grow">
+                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 203: Housekeeping Training</h3>
+                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                    </div>
+                                </div>
+                                <!-- Course Tile -->
+                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
+                                    <div class="p-4 flex flex-col flex-grow">
+                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 204: Mobile User</h3>
+                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Alice 300: Proficient</h2>
+                        <div class="mt-6 border-t border-gray-200 pt-6">
+                            <!-- Grid for Course Tiles -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <!-- Course Tile -->
+                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
+                                    <div class="p-4 flex flex-col flex-grow">
+                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 301: Advanced Reporting</h3>
+                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Explore advanced reporting features to gain deeper insights from your data.</p>
+                                    </div>
+                                </div>
+                                <!-- Course Tile -->
+                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
+                                    <div class="p-4 flex flex-col flex-grow">
+                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 302: A Strategic Guide to Mastering Guest Communication</h3>
+                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Learn strategies to enhance guest communication and satisfaction using Alice's powerful tools.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Other pages will be added here -->
+        <main id="hotel-effectiveness" class="page" style="display: none;"></main>
+        <main id="profitsword" class="page" style="display: none;"></main>
+        <main id="transcendent" class="page" style="display: none;"></main>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-16 border-t">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 Actabl. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Course Iframe View -->
+    <div id="course-view" style="display: none;">
+        <div class="bg-white text-center py-4 border-b">
+             <p class="text-actabl-accent-pink font-inter text-xs">To receive credit for this course, you <strong class="font-bold">must</strong> complete the badge form at the end.</p>
+        </div>
+        <iframe id="course-iframe" class="w-full" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('#main-nav .nav-link');
+            const pages = document.querySelectorAll('.page');
+            const navContainer = document.querySelector('header nav');
+            
+            // Elements for course view functionality
+            const pageContent = document.getElementById('page-content');
+            const footer = document.querySelector('footer');
+            const courseView = document.getElementById('course-view');
+            const courseIframe = document.getElementById('course-iframe');
+            const courseTiles = document.querySelectorAll('.course-tile-link');
+
+            // --- Main Navigation Logic ---
+            navContainer.addEventListener('click', function(e) {
+                const clickedLink = e.target.closest('a[data-page]');
+
+                if (clickedLink) {
+                    e.preventDefault();
+
+                    // Always hide course view and show main content when navigating
+                    courseView.style.display = 'none';
+                    pageContent.style.display = 'block';
+                    if (footer) footer.style.display = 'block';
+                    courseIframe.src = ''; // Clear iframe src to stop any playing media
+
+                    // Standard page switching logic
+                    const targetPageId = clickedLink.getAttribute('data-page');
+                    pages.forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    const targetPage = document.getElementById(targetPageId);
+                    if (targetPage) {
+                        targetPage.style.display = 'block';
+                    }
+
+                    // Update active link style
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('text-actabl-light-blue');
+                        if (link.getAttribute('data-page') === targetPageId) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('text-actabl-light-blue');
+                        }
+                    });
+                }
+            });
+
+            // --- Course Tile Click Logic ---
+            courseTiles.forEach(tile => {
+                tile.addEventListener('click', function(e) {
+                    const courseUrl = e.currentTarget.dataset.courseUrl;
+                    if (courseUrl) {
+                        // Set the iframe source
+                        courseIframe.src = courseUrl;
+
+                        // Hide main content and show the course view
+                        pageContent.style.display = 'none';
+                        if (footer) footer.style.display = 'none';
+                        courseView.style.display = 'block';
+                    }
+                });
+            });
+
+            // --- Disable Right-Click ---
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+
+</body>
+</html>
