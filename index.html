@@ -19,6 +19,19 @@
         #course-view iframe {
             height: calc(100vh - 116px); /* Adjust based on header (68px) + banner (~48px) height */
         }
+        /* Styles for collapsible sections */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .collapsible-section.open .collapsible-content {
+            max-height: 2000px; /* Large enough to fit content */
+        }
+        .collapsible-section.open .collapsible-arrow {
+            transform: rotate(180deg);
+            color: #FF928F; /* Change color to pink when open */
+        }
     </style>
     <script>
         tailwind.config = {
@@ -45,7 +58,6 @@
     <!-- Header and Navigation -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="px-8 py-4">
-            <!-- This container now correctly separates the logo from the nav links -->
             <div class="container mx-auto flex items-center justify-between">
                 <!-- Logo on the left -->
                 <a href="#" data-page="home" class="cursor-pointer">
@@ -123,90 +135,276 @@
                 <section class="text-center mb-16">
                     <h1 class="font-literata text-4xl md:text-5xl font-bold text-white mb-6">Welcome to the <span class="text-actabl-accent-pink">Alice</span> Product Training Dashboard</h1>
                 </section>
-                <div class="space-y-10">
-                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Alice 100: Awareness</h2>
-                        <div class="mt-6 border-t border-gray-200 pt-6">
-                            <!-- Grid for Course Tiles -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <!-- Course Tile -->
-                                <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-101-getting-started-raw-Xch61X3s/content/index.html#/">
-                                    <!-- Course Info -->
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 101: Getting Started</h3>
-                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Take this 25-minute course to learn the fundamentals of Alice by Actabl.</p>
-                                    </div>
-                                </div>
-                                <!-- Add more course tiles here in the future -->
-                            </div>
-                        </div>
-                    </section>
-                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Alice 200: Learning</h2>
-                        <div class="mt-6 border-t border-gray-200 pt-6">
-                            <!-- Grid for Course Tiles -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <!-- Course Tile -->
-                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 201: Desktop User</h3>
-                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
-                                </div>
-                                <!-- Course Tile -->
-                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 202: Admin User</h3>
-                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                    </div>
-                                </div>
-                                <!-- Course Tile -->
-                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 203: Housekeeping Training</h3>
-                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                    </div>
-                                </div>
-                                <!-- Course Tile -->
-                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 204: Mobile User</h3>
-                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <div class="space-y-6">
+                    <!-- Collapsible Section 1 (Open by default) -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden open">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Alice 100: Awareness</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-101-getting-started-raw-Xch61X3s/content/index.html">
+                                            <div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ALICE 101: Getting Started</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course provides a rapid introduction to Alice, covering what the product is, basic navigation, and how to manage your user profile.</p></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                        <h2 class="font-literata text-2xl font-bold text-actabl-dark-blue mb-4">Alice 300: Proficient</h2>
-                        <div class="mt-6 border-t border-gray-200 pt-6">
-                            <!-- Grid for Course Tiles -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <!-- Course Tile -->
-                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 301: Advanced Reporting</h3>
-                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Explore advanced reporting features to gain deeper insights from your data.</p>
-                                    </div>
-                                </div>
-                                <!-- Course Tile -->
-                                <div class="group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 302: A Strategic Guide to Mastering Guest Communication</h3>
-                                        <p class="text-actabl-dark-blue mt-2 text-sm flex-grow">Learn strategies to enhance guest communication and satisfaction using Alice's powerful tools.</p>
+                    </div>
+                     <!-- Collapsible Section 2 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Alice 200: Learning</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                             <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-201-desktop-user-raw-b8nSLk-9/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ALICE 201: Desktop User Training</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course is for hotel staff who use Alice on a desktop. You'll learn essential skills for handling tickets, managing guests, and using logbooks.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-202-admin-user-raw-iVkvraFH/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ALICE 202: Admin User Training</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course equips Admin Users with essential skills to manage property settings, including users, roles, permissions, and message templates.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-203-housekeeping-supervisor-raw-YY7dllni/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ALICE 203: Housekeeping Supervisor Training</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course covers essential skills for managing daily operations, creating room boards, conducting inspections, and training staff on the Mobile App.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-204-mobile-app-user-raw-gsC61zEj/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ALICE 204: Mobile User Training</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course teaches mobile users how to effectively use the Alice Mobile App to accept, create, and manage tickets on the go.</p></div></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                     <!-- Collapsible Section 3 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Alice 300: Proficient</h2>
+                           <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-301-advanced-reporting-raw-_dO5dzlw/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ALICE 301: Advanced Reporting</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course is for proficient users who want to leverage Alice's reporting capabilities to make data-driven decisions.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/alice-302-a-strategic-guide-to-mastering-guest-communication-raw-UvvW3eqp/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Alice 302: A Strategic Guide to Mastering Guest Communication</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 25-minute course is for leaders and managers. Master a proactive communication strategy to elevate the guest journey and drive satisfaction.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
 
-        <!-- Other pages will be added here -->
-        <main id="hotel-effectiveness" class="page" style="display: none;"></main>
-        <main id="profitsword" class="page" style="display: none;"></main>
-        <main id="transcendent" class="page" style="display: none;"></main>
+        <!-- HOTEL EFFECTIVENESS PAGE CONTENT -->
+        <main id="hotel-effectiveness" class="page container mx-auto px-6 py-12" style="display: none;">
+            <div class="max-w-4xl mx-auto">
+                <section class="text-center mb-16">
+                    <h1 class="font-literata text-4xl md:text-5xl font-bold text-white mb-6">Welcome to the <span class="text-actabl-accent-pink">Hotel Effectiveness</span> Product Training Dashboard</h1>
+                </section>
+                <div class="space-y-6">
+                    <!-- Collapsible Section 1 (Open by default) -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden open">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Hotel Effectiveness 100: Awareness</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/hotel-effectiveness-101-introduction-raw-8CH46czA/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Hotel Effectiveness 101: Getting Started</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course provides core objectives of the Hotel Effectiveness platform and its primary functionalities.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Collapsible Section 2 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Hotel Effectiveness 200: Learning</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6 text-actabl-dark-blue">
+                                    <h3 class="font-literata text-xl font-semibold text-actabl-dark-blue mb-3">First Time User Training</h3>
+                                    <p class="mb-4 text-sm leading-relaxed">The Hotel Effectiveness 200 level provides essential, role-specific skills for first-time users. This training is conveniently located within the <em>My Training</em> section of the Hotel Effectiveness application, ensuring you receive instruction focused on the practical skills relevant to your role.</p>
+                                    <p class="mb-4 text-sm font-semibold">To access your <em>My Training</em> lessons, please follow these steps:</p>
+                                    <ol class="list-decimal list-inside text-left space-y-2 text-sm mx-auto max-w-lg mb-6">
+                                        <li>Log into <a href="https://my.hoteleffectiveness.com/signin" target="_blank" rel="noopener noreferrer" class="font-bold text-actabl-light-blue hover:underline">Hotel Effectiveness</a>.</li>
+                                        <li>Click your username in the upper-right corner of the screen.</li>
+                                        <li>Select <span class="font-bold">My Training</span> from the dropdown menu.</li>
+                                        <li>Click <span class="font-bold">Complete Now</span> to start each lesson in your learning path.</li>
+                                    </ol>
+                                    <img src="https://i.ibb.co/dwqf6mVt/Untitled.png" alt="My Training Instructions" class="rounded-md shadow-md mx-auto">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Collapsible Section 3 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Hotel Effectiveness 300: Proficient</h2>
+                           <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                             <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/hotel-effectiveness-301-strategic-scheduling-for-profitability-raw-K3suPlvF/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Hotel Effectiveness 301: Strategic Scheduling for Profitability</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">In this 30-minute course, learn to strategically leverage the HE Scheduler to transform labor management and boost profitability.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- PROFITSWORD PAGE CONTENT -->
+        <main id="profitsword" class="page container mx-auto px-6 py-12" style="display: none;">
+            <div class="max-w-4xl mx-auto">
+                <section class="text-center mb-16">
+                    <h1 class="font-literata text-4xl md:text-5xl font-bold text-white mb-6">Welcome to the <span class="text-actabl-accent-pink">ProfitSword</span> Product Training Dashboard</h1>
+                </section>
+                <div class="space-y-6">
+                    <!-- Collapsible Section 1 (Open by default) -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden open">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">ProfitSword S: System Setup</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-s-1-user-setup-raw-4d9rPGBE/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword Setup 1: User Setup</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course guides admins through creating user menu templates and efficiently adding new users to the system.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-s-2-site-setup-raw-A6iPvDRA/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword Setup 2: Site Setup</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course guides admins through setting up sites and properties, including customizing site groups and lists.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-s-3-daily-items-setup-raw-JqmYqz-u/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword Setup 3: Daily Items Setup</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 35-minute course guides admins through setting up and completing Daily Items tasks, including Daily Tasks and Daily Logs.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-s-4-mapping-labor-setup-guide-raw-rWjxE5Ya/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword Setup 4: Mapping Labor Setup Guide</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 25-minute course teaches admins to map labor data by aligning codes for accurate forecasting and reporting.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-s-5-drivers-setup-raw-QW0RARKL/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword Setup 5: Drivers Setup</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 25-minute course guides admins through setting up and utilizing drivers within the Forecast and Budget modules.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-s-6-income-journal-setup-raw-_lHAgK5b/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword Setup 6: Income Journal Setup</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course guides admins through setting up the Income Journal, including customizing accounts and menus.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-s-7-mapping-and-balancing-the-income-journal-raw-gnk48bii/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword Setup 7: Mapping and Balancing the Income Journal</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 50-minute course teaches admins how to map imported PMS and POS data to accurately balance the Income Journal.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Collapsible Section 2 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">ProfitSword 100: Awareness</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                               <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-101-getting-started-raw-bU6goFGB/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 101: Getting Started</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 25-minute course provides a rapid introduction to basic navigation, dashboards, key icons, and shortcut keys.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Collapsible Section 3 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">ProfitSword 200: Learning</h2>
+                           <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                             <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-201-month-end-accounting-raw-XtQlTWib/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 201: Month-End Accounting</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 40-minute course guides users through submitting and exporting the Income Journal and completing the full month-end process.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-202-forecasting-and-budgeting-raw-UnbtW2Ar/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 202: Forecasting and Budgeting</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 50-minute course covers navigating, inputting data, and reviewing reports within the Forecast and Budget modules.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-203-reports-raw-gyaxrEtY/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 203: Reports</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course guides users through basic navigation of reporting dashboards, changing parameters, and viewing popular reports.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-204-submitting-a-night-audit-packet-raw-552vmwUE/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 204: Submitting a Digital Night Audit</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 15-minute course guides users through the essential process of submitting a digital night audit within the platform.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-205-approving-a-night-audit-packet-raw-LPrb838_/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 205: Approving a Digital Night Audit</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 15-minute course guides users through the essential process of approving a digital night audit within the platform.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-206-profit-plan-commentary-reports-raw-FA5v5Rvc/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 206: Profitplan (Commentary Reports)</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course introduces ProfitPlan, covering common reports, navigation, customization, and data entry.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/profit-sword-207-profit-ability-raw-kBW73K_V/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">ProfitSword 207: ProfitAbility</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This course focuses on leveraging ProfitAbility to turn raw data into actionable insights using filtering, dashboards, and automated alerts.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Collapsible Section 4 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">ProfitSword 300: Proficient</h2>
+                           <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                             <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <p class="text-center text-gray-500">Courses coming soon.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- TRANSCENDENT PAGE CONTENT -->
+        <main id="transcendent" class="page container mx-auto px-6 py-12" style="display: none;">
+            <div class="max-w-4xl mx-auto">
+                <section class="text-center mb-16">
+                    <h1 class="font-literata text-4xl md:text-5xl font-bold text-white mb-6">Welcome to the <span class="text-actabl-accent-pink">Transcendent</span> Product Training Dashboard</h1>
+                </section>
+                <div class="space-y-6">
+                    <!-- Collapsible Section 1 (Open by default) -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden open">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Transcendent 100: Awareness</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/transcendent-101-getting-started-raw-qHu4iscH/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Transcendent 101: Getting Started</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course introduces Transcendent, covering basic navigation, user roles, and profile management for new users.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Collapsible Section 2 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Transcendent 200: Learning</h2>
+                            <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                            <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/transcendent-201-site-admin-raw-Xn80Ac4I/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Transcendent 201: Site Admin</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course empowers Site Admins to confidently manage users, assets, work orders, schedules, and leverage QR codes.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/transcendent-202-mobile-user-raw-Q4oO17kT/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Transcendent 202: Mobile User</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 25-minute course empowers mobile users to efficiently manage daily tasks, including viewing, completing, and submitting work orders on the go.</p></div></div>
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/transcendent-203-enterprise-admin-raw-tlXcYydK/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Transcendent 203: Enterprise Admin</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 20-minute course empowers Enterprise Admins to effectively set up and manage users alongside comprehensive asset management.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Collapsible Section 3 -->
+                    <div class="collapsible-section bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button class="collapsible-header w-full flex justify-between items-center p-6 sm:p-8 text-left">
+                            <h2 class="font-literata text-xl sm:text-2xl font-bold text-actabl-dark-blue">Transcendent 300: Proficient</h2>
+                           <svg class="collapsible-arrow w-6 h-6 text-actabl-light-blue transition-transform duration-300 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div class="collapsible-content">
+                             <div class="px-6 sm:px-8 pb-8 pt-0">
+                                <div class="border-t border-gray-200 pt-6">
+                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="course-tile-link group bg-gray-50 rounded-lg border-2 border-transparent shadow-sm hover:shadow-lg hover:border-actabl-accent-pink transition-all duration-300 flex flex-col overflow-hidden text-center cursor-pointer" data-course-url="https://s3.us-east-1.amazonaws.com/university-content.hoteleffectiveness.com/ActablAcademy072025/transcendent-301-a-property-champions-guide-to-success-raw-nr71A-om/content/index.html"><div class="p-4 flex flex-col flex-grow"><h3 class="font-literata text-lg font-semibold text-actabl-dark-blue group-hover:text-actabl-accent-pink transition-colors duration-300">Transcendent 301: A Property Champion's Guide to Success</h3><p class="text-actabl-dark-blue mt-2 text-sm flex-grow">This 30-minute course follows an experienced Director of Engineering as he learns to leverage the platform for strategic decision-making.</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
     </div>
 
@@ -220,7 +418,7 @@
     <!-- Course Iframe View -->
     <div id="course-view" style="display: none;">
         <div class="bg-white text-center py-4 border-b">
-             <p class="text-actabl-accent-pink font-inter text-xs">To receive credit for this course, you <strong class="font-bold">must</strong> complete the badge form at the end.</p>
+             <p class="text-actabl-accent-pink font-inter text-xs">To receive credit for this course, you <strong class="font-bold">must</strong> complete the certificate form at the end.</p>
         </div>
         <iframe id="course-iframe" class="w-full" frameborder="0" allowfullscreen></iframe>
     </div>
@@ -228,16 +426,38 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const navLinks = document.querySelectorAll('#main-nav .nav-link');
+            const navLinks = document.querySelectorAll('#main-nav .nav-link, a[data-page]');
             const pages = document.querySelectorAll('.page');
             const navContainer = document.querySelector('header nav');
             
-            // Elements for course view functionality
             const pageContent = document.getElementById('page-content');
             const footer = document.querySelector('footer');
             const courseView = document.getElementById('course-view');
             const courseIframe = document.getElementById('course-iframe');
-            const courseTiles = document.querySelectorAll('.course-tile-link');
+            
+            function getCourseTilesAndAddListeners() {
+                document.querySelectorAll('.course-tile-link').forEach(tile => {
+                    tile.addEventListener('click', function(e) {
+                        const courseUrl = e.currentTarget.dataset.courseUrl;
+                        if (courseUrl) {
+                            courseIframe.src = courseUrl;
+                            pageContent.style.display = 'none';
+                            if (footer) footer.style.display = 'none';
+                            courseView.style.display = 'block';
+                        }
+                    });
+                });
+            }
+            
+            getCourseTilesAndAddListeners();
+
+            // --- Collapsible Section Logic ---
+            document.querySelectorAll('.collapsible-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const section = header.parentElement;
+                    section.classList.toggle('open');
+                });
+            });
 
             // --- Main Navigation Logic ---
             navContainer.addEventListener('click', function(e) {
@@ -246,13 +466,11 @@
                 if (clickedLink) {
                     e.preventDefault();
 
-                    // Always hide course view and show main content when navigating
                     courseView.style.display = 'none';
                     pageContent.style.display = 'block';
                     if (footer) footer.style.display = 'block';
-                    courseIframe.src = ''; // Clear iframe src to stop any playing media
+                    courseIframe.src = ''; 
 
-                    // Standard page switching logic
                     const targetPageId = clickedLink.getAttribute('data-page');
                     pages.forEach(page => {
                         page.style.display = 'none';
@@ -262,32 +480,17 @@
                         targetPage.style.display = 'block';
                     }
 
-                    // Update active link style
-                    navLinks.forEach(link => {
+                    document.querySelectorAll('a[data-page]').forEach(link => {
                         link.classList.remove('active-nav-link');
-                        link.classList.add('text-actabl-light-blue');
+                        if(link.parentElement.id === 'main-nav') {
+                            link.classList.add('text-actabl-light-blue');
+                        }
                         if (link.getAttribute('data-page') === targetPageId) {
                             link.classList.add('active-nav-link');
                             link.classList.remove('text-actabl-light-blue');
                         }
                     });
                 }
-            });
-
-            // --- Course Tile Click Logic ---
-            courseTiles.forEach(tile => {
-                tile.addEventListener('click', function(e) {
-                    const courseUrl = e.currentTarget.dataset.courseUrl;
-                    if (courseUrl) {
-                        // Set the iframe source
-                        courseIframe.src = courseUrl;
-
-                        // Hide main content and show the course view
-                        pageContent.style.display = 'none';
-                        if (footer) footer.style.display = 'none';
-                        courseView.style.display = 'block';
-                    }
-                });
             });
 
             // --- Disable Right-Click ---
